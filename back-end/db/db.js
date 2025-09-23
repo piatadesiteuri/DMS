@@ -866,7 +866,7 @@ async function dbFindUserByEmail(email) {
         console.log('✅ Got database connection for user lookup');
 
         const [results] = await con.query(`
-            SELECT u.*, i.nom_institution as institution_name 
+            SELECT u.*, i.name as institution_name 
             FROM user u 
             LEFT JOIN institutions i ON u.institution_id = i.id_institution 
             WHERE u.email = ?
