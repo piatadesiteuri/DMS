@@ -154,8 +154,8 @@ const LoginPageAlt = ({isLogged, onReplace}) => {
           console.log("LoginPage.js: Redirecting to director dashboard");
           window.location.href = "/director/dashboard";
         } else {
-          console.log("LoginPage.js: Redirecting to home page");
-          window.location.href = "/";
+          console.log("LoginPage.js: Redirecting to user dashboard");
+          window.location.href = "/dashboard";
         }
       } else if (responseData === 0) {
         console.log("LoginPage.js: Account not verified");
