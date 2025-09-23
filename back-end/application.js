@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const express = require("express")
 const app = express()
-const port = process.env.NODE_ENV === 'production' ? 3003 : 3000
+const port = process.env.PORT || (process.env.NODE_ENV === 'production' ? 3000 : 3000)
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const mysql = require('mysql2')
