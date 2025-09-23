@@ -52,6 +52,12 @@ const dbConfig = {
     connectTimeout: 30000 // Increase timeout to 30 seconds
 };
 
+// Force PSPD database in production if not explicitly set
+if (process.env.NODE_ENV === 'production' && !process.env.MYSQL_DATABASE) {
+    console.log('🔧 FORCING PSPD database in production!');
+    dbConfig.database = 'PSPD';
+}
+
 // If MYSQL_URL is provided, parse it
 if (process.env.MYSQL_URL) {
     try {
