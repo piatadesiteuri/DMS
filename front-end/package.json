@@ -57,6 +57,7 @@
     "react-scripts": "5.0.1",
     "leaflet": "^1.7.1",
     "react-leaflet": "^4.2.1",
+    "react-csv": "^2.2.2",
     "react-toastify": "^11.0.5",
     "reactstrap": "^9.2.3",
     "shadcn-ui": "^0.8.0",
