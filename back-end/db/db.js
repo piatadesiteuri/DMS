@@ -859,20 +859,35 @@ async function dbVerifyDocument(id_user, documentId) {
 }
 
 async function dbFindUserByEmail(email) {
+    try {
+        console.log('🔍 dbFindUserByEmail called with email:', email);
+        const con = await pool.getConnection();
+        console.log('✅ Got database connection for user lookup');
 
-    const con = await pool.getConnection();
-
-
-
-
-    const [results] = await con.query(`
-        SELECT u.*, i.name as institution_name 
-        FROM user u 
-        LEFT JOIN institutions i ON u.institution_id = i.id_institution 
-        WHERE u.email = ?
-    `, [email]);
-    con.release();
-    return results
+        const [results] = await con.query(`
+            SELECT u.*, i.nom_institution as institution_name 
+            FROM user u 
+            LEFT JOIN institutions i ON u.institution_id = i.id_institution 
+            WHERE u.email = ?
+        `, [email]);
+        
+        console.log('📊 Query results:', {
+            email: email,
+            resultCount: results.length,
+            userFound: results.length > 0 ? {
+                id: results[0].id_user,
+                email: results[0].email,
+                role: results[0].roles,
+                institution_id: results[0].institution_id
+            } : null
+        });
+        
+        con.release();
+        return results;
+    } catch (error) {
+        console.error('❌ Error in dbFindUserByEmail:', error.message);
+        throw error;
+    }
 }
 
 async function dbGetUserEmailById(id) {
