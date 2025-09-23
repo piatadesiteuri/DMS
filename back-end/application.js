@@ -151,6 +151,36 @@ app.use(express.static(publicDir));
 
 ////////////////////////pages routes\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+// Debug endpoint to check database connection
+app.get('/api/debug-db', async (req, res) => {
+    try {
+        const { pool } = require('./db/db');
+        const connection = await pool.getConnection();
+        const [result] = await connection.query('SELECT DATABASE() as current_db, COUNT(*) as user_count FROM user LIMIT 1');
+        connection.release();
+        res.json({
+            success: true,
+            database: result[0].current_db,
+            userCount: result[0].user_count,
+            env: {
+                NODE_ENV: process.env.NODE_ENV,
+                MYSQL_DATABASE: process.env.MYSQL_DATABASE,
+                MYSQL_HOST: process.env.MYSQL_HOST ? 'SET' : 'NOT_SET'
+            }
+        });
+    } catch (error) {
+        res.json({
+            success: false,
+            error: error.message,
+            env: {
+                NODE_ENV: process.env.NODE_ENV,
+                MYSQL_DATABASE: process.env.MYSQL_DATABASE,
+                MYSQL_HOST: process.env.MYSQL_HOST ? 'SET' : 'NOT_SET'
+            }
+        });
+    }
+});
+
 // Enhanced session check with impersonation support
 app.get('/session-check', (req, res) => {
     console.log('=== SESSION CHECK DEBUG (application.js) ===');
