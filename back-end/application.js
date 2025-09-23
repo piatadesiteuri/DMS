@@ -1285,5 +1285,13 @@ app.post('/api/notifications/upload-request', authenticateToken, async (req, res
 	}
 });
 
+// Serve static files from frontend build (for React app)
+app.use(express.static(path.join(__dirname, '../front-end/build')));
+
+// Serve React app for all non-API routes (must be last!)
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, '../front-end/build', 'index.html'));
+});
+
 module.exports = app;
 
