@@ -46,10 +46,10 @@ const dbConfig = {
     connectTimeout: 30000 // Increase timeout to 30 seconds
 };
 
-// Force PSPD database in production if not explicitly set
-if (process.env.NODE_ENV === 'production' && !process.env.MYSQL_DATABASE) {
-    console.log('🔧 FORCING PSPD database in production!');
-    dbConfig.database = 'PSPD';
+// Force railway database in production for Railway deployment
+if (process.env.NODE_ENV === 'production') {
+    console.log('🔧 FORCING railway database in production!');
+    dbConfig.database = 'railway';
 }
 
 console.log('🔧 Final database config:', {
