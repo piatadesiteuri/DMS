@@ -853,6 +853,17 @@ app.use((req, res) => {
 
 // Change app.listen to httpServer.listen
 const port = process.env.PORT || 3000;
+
+// Serve static files from frontend build
+app.use(express.static(path.join(__dirname, '../front-end/build')));
+
+// API routes
+app.use('/api', route);
+
+// Serve React app for all non-API routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../front-end/build', 'index.html'));
+});
 httpServer.listen(port, () => console.log(`Server listening on port ${port}!`));
 
 // Export both app and io for use in other modules
