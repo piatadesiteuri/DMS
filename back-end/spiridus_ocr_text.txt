@@ -1,0 +1,223 @@
+Finantat de Planul National
+LEE Uniunea Europeană BoP Cin ation și Rezilienţă
+NoxtGenerationEU
+Apelul Componenta C7 — Transformare digitală, 13. Realizarea sistemului de eHealth și telemedicinăi
+Investiţia specifică; 13.3 - Digitalizarea instituțiilor cu atribuții în domeniul sanitar aflate în
+subordinea MS; COD APEL MS-732
+Beneficiar: Direcţia de Sănătate Publică Dolj
+Titlul proiectului: , Digitalizarea Direcţiei de Sănătate Publică Dolj”
+Contract: Contractul de finanțare nr. 1431/49/13.2 din data de 25.04.2024 încheiat cu Ministerul
+Sanataii
+MINISTERUL SĂNĂTĂŢII Il MRC »
+DIRECTIA DE SANATATE [he — 8
+PUBLICĂ DOLJ pre
+a Certificat or. 407C
+“Sediul central: Sediul 2 Sediul 3: Sediu 4:
+-Tabact wr. I. Craiva tc. Lami 10, Craiova six Brest, n 6, Craiova spe Chin Lecca, n 2, Cralova
+Tel 0251.31.00.67 Tol Fax: 0251.55,06,69 Tel 0251.41.31.34 Tel/Fax: 0251.41.75.80
+Fax. 0251310071 Ema: ofice@sanpubdiro Ema: labop dolf@sahon.com E-mail iricnGiyatonsom
+E-mail: dspdoljl 7@emait com
+Website: wow dpdol ro . el
+PHOT,
+DIRECTOR EXECDTIV,
+Eten
+=
+APROBAT,
+DIR. EXEC ADJ. ECONOMIC
+Ec, Marcu Nicolae
+CAIET DE SARCINI
+Software de aplicații necesare desfăşurării activității
+Nr.2738.../...12,95:2025
+Software de aplicații necesare desfăşurării activității din cadrul proiectului „Digitalizarea
+Direcției de Sănătate Publică Dolj”
+“Viitorul contract de achiziție publica se va derula în cadrul Direcţiei de Sănătate Publică
+Poli, fiind finanțat prin Planul Național de Redresare și Reziliență (PNRR), Pilonul 11:
+Transformare Digitală, Componenta 7: Transformare Digitală, Investiţia 13: Realizarea
+sistemului de cHealth și telemedicină, Investiţia specifică 13.3: Digitalizarca instituțiilor cu
+1/26
+
+
+te a ia
+atribuții în domeniul sanitar aflate în subordinea Ministerului Sănătății, conform Apelului de
+Proiecte — Cod Apel: MS-732.
+
+Proiectul, întitulat „Digitalizarea Direcţiei de Sănătate Publică Dolj”, este reglementat prin
+Contractul de finanțare nr. 1431/49/13.2 din data de 25.04.2024, încheiat cu Ministerul Sănătății.
+Cuprins
+1.  IMErOdUCEre,..........-.... i iii otet ete sss sss nat n ta ana a 3
+2. Context si prezentarea Autoritatii contractante.......................] | i îti i 4
+
+2.1. Descrierea situației actuale........................iiiieteeeeiee i tatea A
+
+~ 2.2. Descrierea problemelor si nevoilor de digitalizare.................. . || oii 5
+23. BEBOMC cerns renner ts OO nt ta 5
+
+3. Obiectul contractului........................ ERS 1
+
+4. Aplicația software SOCIALE. ....oo..ooooeceeeeesereesseesseeneesoeses oes anna Bi
+
+41. Lot1-(SILMD. - S.CIM.)...1....oiiiiii teen aaa na a 3
+
+42. Lot 2 - software pentru management operațional si lant de aprovizionare..................9
+
+43. Operațiuni cu titlu accesoriu ............................... EC — Îl
+
+4.3.1. Instalare, punere în funcțiune / tStare...........c...ooooveroceerrseersooessooeee ores 11
+
+* 4.3.2.Mentenanta corectivii în perioada contractuală....................... EE — 12
+423 Suport EUMIS. cco. secsemsseesse msm === 588 nana ET 12
+
+424 Instruirea personalului pentru utiliZare.................... erei eee e neant 14
+
+S. Atribuțiile şi responsabilitățile parţilor................... i einen SE —— 15
+
+6. Recepția si livrabilele .................- ieri einen Ee |
+
+7. Modalităţi de plată în cadrul contractului ........................î| 0-a aT 7
+
+71. Termen de Plată...............n.- iii er eee nea ata aa aaa nana 17
+
+8. Metodologia de evaluare a ofertelor ...............irieeie iii nn 17
+
+9. Modalitatea de prezentare a ofertei.................................... En m—— 19.
+
+9.1. Modalitatea de prezentare a ofertei ....................... IRI ss— 19
+
+
+Finantat de >)» Planul Naţional ~~
+Uniunea Europeană de Redresare și Rezilienta
+NextGenerationEU
+92. Prezentarea propunerii fCRNice..............eirer aa 19
+9:3. Prezentarea propunerii financiare............ iei 20
+10. Munagementul şi activități de raportare în cadrul contractului............................ 20
+M.  Cadrul Îegal...... tt a 20
+12. Riscuri si masuri de BeSEIONATE............. am 21
+13. Documente și fOrTAULATE........rei na 25
+1. Introducere
+
+Caietul de sarcini face parte integrantă din documentația de atribuire şi constituie ansamblul
+Serințelor pe baza cărora se elaborcază de către fiecare ofertant propunerea tehnică.
+
+Caietul de sarcini conține, în mod obligatoriu, specificații tehnice. Acestea definesc, după caz
+și fără a se limita la cele ce urmează, caracteristici referitoare la nivelul calitativ. tehnic si de
+performanță, siguranța în exploatare, dimensiuni, precum şi sisteme de asigurarc a calității,
+terminologie, simboluri, teste şi metode de testare, ambalare, ctichetare, marcare, condițiile pentru
+certificarea conformităţii cu standarde relevante sau altele asemenea.
+
+În cadrul acestei proceduri, Direcţia de Sănătate Publică Dolj îndeplineşte rolul de
+autoritate/entitale contractantă, respectiv autoritatea/entitatca contractantă în cadrul Contractului
+
+Pentru scopul prezentei secțiuni a documentației de atribuire, orice activitate descrisă într-un
+
+= anumit capitol din Caietul de Sarcini si nespecificată explicit în alt capitol, trebuie interpretată ca
+fiind menționată în toate capitolele unde se consideră de către Ofertant că aceasta trebuia menționată
+Pentru asigurarea îndeplinirii obiectului Contractului.
+
+Cerințele impuse vor fi considerate ca fiind minime și obligatorii. Oferta care nu respects
+cerințele minime obligatorii prevăzute în Caietul de sarcini va fi considerată neconformă şi va fi
+respinsă.
+
+Nerespectarea de către ofertanți a instrucțiunilor şi/ sau prevederilor prezentului Caiet de
+sarcini conduce la considerarea ofertei ca fiind neconformă şi/ sau inacceptabilă.
+
+Specificaiile tehnice care indică un anumit producător, o anumită originc sau un anumit
+procedeu ori care se referă la mărci, brevete, tipuri, la o origine sau la o producţie specifică sau la
+Standarde sunt menționate doar pentru identificarea cu uşurinţă a caracteristicilor produselor ce
+urmeazii a i achiziționate şi NU au ca efect favorizarea sau climinarea anumitor operatori economici.
+Aceste specificații vor fi întotdeauna considerate ca având menfiunca «sau echivalent».
+
+3/26
+
+
+_::::-. o Le
+NextGonerationEU
+2. Context si prezentarea Autoritatii contractante
+Direcţia de Sănătate Publică Dolj (DSP Dolj) este o instituție publică aflată în subordinea
+Ministerului Sănătății, având rolul de a implementa politicile de sănătate publică la nivel județean.
+DSP Dolj coordonează și monitorizează activitățile de sănătate publică, fiind responsabilă pentru
+aplicarea normelor si reglementărilor din domeniul sanitar.
+În prezent, DSP Dolj implementează proiectul „Digitalizarea Direcţiei de Sănătate Publică
+Dolj”. finanțat prin Planul National de Redresare si Reziliență (PNRR), Componenta C7 -
+Transformare Digitală, 13 - Realizarca sistemului de cHealth si telemedicină, Investiţia
+specifică 13.2 - Digitalizarea instituțiilor cu atribuții în domeniul sanitar aflate în subordinea
+Ministerului Sănătății.
+~ Proiectul are ca scop modernizarea si digitalizarea proceselor interne pentru îmbunătățirea
+eficienței instituționale, creșterea accesibilității serviciilor şi reducerea birocrației în relația cu
+cetățenii si alte instituții
+Denumire organizație Direcţia de Sănătate Publică Dolj
+Direcţia de Sănătate Publică Dolj isi desfăşoară activitatea în 4 locații situate în Craiova care
+nu sunt interconectate:
+- sediul din strada Tabaci, nr. 1, Craiova
+- sediul din strada Constantin Lecca, nr. 2, Craiova
+- sediul din strada Brestei, nr. 6, Craiova
+- sediul din strada Lămâiţei, nr. 10, Craiova
+Tipul Organizaţiei Unitate cu personalitate juridică, serviciu public deconcentrat în
+subordinea Ministerului Sănătății, reprezentând autoritatea de sănătate Publică la nivel local.
+m Cod de înregistrare fiscală/ClF: 11333620
+Adresa poştală: str. Tabaci, nr. 1, Craiova, județ Dolj
+Telefon/Fax: Tel.: 0251-31.00.67
+Adresa e-mail: dspdol17@gmail.com
+Pagina Web: http:/www.dspdoli.ro/
+2.1. Descrierea situației actuale
+În prezent, DSP Dolj utilizează proceduri administrative tradiționale, bazate în mare
+parte pe documente în format fizic si pe procese manuale de gestionare a acestora.
+Principalele caracteristici ale situației actuale includ:
+* Dependenţă ridicată de hârtie, ceca ce îngreunează accesul rapid la informații si centralizarea
+acestora.
+41/26
+
+
+Finantat de PP GlonuiNational
+EE) Uniunea Europeană o de Redresare 3 Reziliență
+NNexIGenerationEU
+
+* Timp mare de prelucrare a documentelor, având în vedere că acestea trebuie transmise între
+compartimente sau arhivate manual.
+
+* Dificultăţi în gestionarea fluxurilor de lucru şi monitorizarea stadiului rezolvării
+documentelor și cererilor.
+
+* Comunicare fragmentată între departamente, ceea ce afectează cficiența operațională a
+instituției.
+
++ Lipsa unui sistem integrat de evidență si raportare, ceea ce face dificilă analiza si utilizarea
+datelor pentru luarea deciziilor.
+
+2.2. Descrierea problemelor si nevoilor de digitalizare
+
+= Pentru a răspunde acestor probleme, DSP Dolj are nevoic de:
+
+* Implementarea unui sistem informatie integrat pentru gestionarea electronică a documentelor
+si cererilor.
+
++ Dotarea cu echipamente hardware (servere, unități centrale, monitoare, imprimante,
+echipamente de rețea) pentru susținerea infrastructurii digitale.
+
+* Utilizarea unui sistem digital pentru automatizarea fluxurilor de lucru, care să permită
+circulația rapidă si eficientă a documentelor între compartimente.
+
+* Interoperabilitate cu sisteme externe: Aplicația va oferi APl-uri sau module de integrare
+pentru schimbul automat de date cu platformele Ministerului Sănătății și ale altor instituții,
+conform cerințelor de interoperabilitate.
+
++ Creşterea securității datelor și protejarea informațiilor împotriva pierderii, accesului
+neautorizat sau coruperii.
+
+ă, 23. Beneficii
+Implementarea soluției digitale va genera multiple beneficii, printre care:
+
+* Eficiență operațională crescută — timpii de procesare a documentelor vor fi reduși semnificativ.
+
+* Monitorizarea în timp real a documentelor — fiecare solicitare va putea fi urmărită digital, fără
+întârzieri.
+
+* Automatizarea fluxurilor de lucru — funcționarii nu vor mai fi nevoiți să se deplaseze fizic
+pentru a obține documente.
+
+* Reducerea consumului de hârtie — digitalizarca arhivelor va elimina dependența de documente
+în format fizic.
+
+* Securitate sporită — datele vor fi stocate în medii sigure, protejate împotriva pierderii sau
+accesului neautorizat.
+
+5/26

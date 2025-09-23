@@ -1,0 +1,72 @@
+name: Build Electron App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: sync-agent/package-lock.json
+    
+    - name: Install dependencies
+      run: |
+        cd sync-agent
+        npm ci
+    
+    - name: Build Windows App
+      run: |
+        cd sync-agent
+        npm run build-win
+    
+    - name: Upload Windows Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-builds
+        path: |
+          sync-agent/dist/*.exe
+          sync-agent/dist/*.msi
+          sync-agent/dist/*.zip
+
+  build-mac:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: sync-agent/package-lock.json
+    
+    - name: Install dependencies
+      run: |
+        cd sync-agent
+        npm ci
+    
+    - name: Build macOS App
+      run: |
+        cd sync-agent
+        npm run build-mac
+    
+    - name: Upload macOS Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: macos-builds
+        path: |
+          sync-agent/dist/*.dmg
+          sync-agent/dist/*.zip 

@@ -4,27 +4,24 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Environment variables
-.env
+# Environment variables (keep some .env files)
 .env.local
 .env.development.local
 .env.test.local
-.env.production.local
 
-# Logs
-*.log
-logs/
+# Logs (specific log files only)
 backend.log
 frontend.log
 ngrok-demo.log
 backend-demo.log
+download-server.log
+server.log
 
-# Database files
+# Database files (keep SQL files, exclude DB files)
 *.db
-*.sqlite
-*.sqlite3
 digital_documents_db
 digital_documents_db.db
+database2.db
 
 # OS generated files
 .DS_Store
@@ -40,49 +37,36 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
-*~
 
-# Build outputs
-build/
-dist/
-out/
+# Build outputs (specific ones)
+sync-agent/dist/
+sync-agent/build/
+front-end/build/
 
 # Temporary files
-tmp/
-temp/
-*.tmp
-*.temp
+temp_ocr_test/
 
 # Configuration files with sensitive data
 my-remote.cnf
 my-temp.cnf
-cookies.txt
 
-# Uploads directory (contains user files)
-back-end/uploads/
-uploads/
+# Large executable and archive files only
+*.exe
+*.msi
+*.dmg
+*.pkg
+*.deb
+*.rpm
+*.zip
+*.rar
+*.7z
+*.tar.gz
 
-# Sync agent builds
-sync-agent/dist/
-sync-agent/build/
-sync-agent/out/
-
-# Electron builds
+# Sync agent large builds only
 sync-agent/EDMS Sync Agent*.exe
 sync-agent/EDMS Sync Agent*.zip
-sync-agent/win-unpacked/
-sync-agent/mac/
-sync-agent/linux/
-
-# Test files
-test-*.js
-*_test.js
-test/
-
-# Backup files
-*.bak
-*.backup
-*~
+back-end/sync-agent-archive/
+back-end/sync-agent-dist/
 
 # Lock files (keep package-lock.json but ignore others)
 yarn.lock
@@ -104,7 +88,7 @@ pids
 # Optional eslint cache
 .eslintcache
 
-# Microbundle cache
+# Electron cache
 .rpt2_cache/
 .rts2_cache_cjs/
 .rts2_cache_es/
@@ -128,16 +112,10 @@ pids
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/
-public
 
 # Storybook build outputs
 .out
 .storybook-out
-
-# Temporary folders
-tmp/
-temp/

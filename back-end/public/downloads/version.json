@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "buildDate": "2025-08-25T11:46:55.632Z",
+  "fileName": "EDMS_Sync_Agent_Latest.exe",
+  "fileSize": 100670705,
+  "fileSizeMB": "96.01",
+  "features": [
+    "Auto-upload for PDF files",
+    "Auto-delete for removed files",
+    "Real-time synchronization",
+    "Keywords and tags generation",
+    "Thumbnail generation",
+    "Cross-platform support (Windows, macOS, Linux)",
+    "Folder structure synchronization",
+    "Database integration"
+  ],
+  "changelog": [
+    "Fixed auto-upload functionality",
+    "Improved file detection with chokidar",
+    "Enhanced error handling",
+    "Added configuration system",
+    "Fixed thumbnail generation issues",
+    "Improved UI responsiveness"
+  ]
+}

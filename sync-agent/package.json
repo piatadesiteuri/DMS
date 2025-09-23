@@ -1,0 +1,196 @@
+{
+  "name": "edms-sync-agent",
+  "version": "1.0.0",
+  "description": "EDMS Document Synchronization Agent",
+  "main": "main.js",
+  "homepage": "http://192.168.0.12:3002",
+  "author": {
+    "name": "EDMS Team",
+    "email": "support@edms.com"
+  },
+  "scripts": {
+    "start": "electron .",
+    "start-no-thumbnails": "DISABLE_THUMBNAILS=true electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win --publish=never",
+    "build-mac": "electron-builder --mac --publish=never",
+    "build-linux": "electron-builder --linux --publish=never",
+    "build-all": "electron-builder --win --mac --linux --publish=never",
+    "dist": "electron-builder --publish=always",
+    "pack": "electron-builder --dir",
+    "postinstall": "electron-builder install-app-deps",
+    "deploy": "node build-and-deploy.js",
+    "deploy-win": "node build-and-deploy.js",
+    "deploy-mac": "node build-and-deploy.js",
+    "deploy-linux": "node build-and-deploy.js",
+    "deploy-all": "node build-and-deploy.js"
+  },
+  "build": {
+    "appId": "com.edms.sync-agent",
+    "productName": "EDMS Sync Agent",
+    "copyright": "Copyright © 2024 EDMS Team",
+    "buildDependenciesFromSource": false,
+    "nodeGypRebuild": false,
+    "npmRebuild": false,
+    "directories": {
+      "output": "dist",
+      "buildResources": "public"
+    },
+    "files": [
+      "**/*",
+      "!dist/**/*",
+      "!src/**/*",
+      "!.git/**/*",
+      "!.gitignore",
+      "!README.md",
+      "!*.md",
+      "!node_modules/.cache/**/*"
+    ],
+    "asar": false,
+    "extraFiles": [
+      {
+        "from": "eng.traineddata",
+        "to": "eng.traineddata"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "public/icon.png",
+      "publisherName": "EDMS Team",
+      "verifyUpdateCodeSignature": false,
+      "requestedExecutionLevel": "asInvoker",
+      "signAndEditExecutable": false,
+      "signDlls": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "EDMS Sync Agent",
+      "menuCategory": "EDMS",
+      "installerIcon": "public/icon.ico",
+      "uninstallerIcon": "public/icon.ico",
+      "installerHeaderIcon": "public/icon.ico",
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true,
+      "include": "installer.nsh"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "public/icon.icns",
+      "category": "public.app-category.productivity",
+      "darkModeSupport": true,
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "notarize": false,
+      "identity": null,
+      "type": "development",
+      "forceCodeSigning": false,
+      "extendInfo": {
+        "NSCameraUsageDescription": "This app needs access to camera for document scanning.",
+        "NSMicrophoneUsageDescription": "This app needs access to microphone for document processing.",
+        "CFBundleExecutable": "EDMS Sync Agent",
+        "CFBundleDisplayName": "EDMS Sync Agent",
+        "CFBundleIdentifier": "com.edms.sync-agent",
+        "LSApplicationCategoryType": "public.app-category.productivity"
+      }
+    },
+    "dmg": {
+      "title": "${productName} ${version}",
+      "icon": "public/icon.icns",
+      "background": null,
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "public/icon.png",
+      "category": "Office",
+      "synopsis": "EDMS Document Synchronization Agent"
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://192.168.0.12:3002/downloads/"
+      }
+    ]
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "bcryptjs": "^2.4.3",
+    "chokidar": "^3.5.3",
+    "dotenv": "^16.4.5",
+    "electron-store": "^8.1.0",
+    "form-data": "^4.0.2",
+    "mysql2": "^3.9.2",
+    "natural": "^8.0.1",
+    "pdf-lib": "^1.17.1",
+    "pdf2pic": "^3.2.0",
+    "pdfjs-dist": "^3.11.174",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "socket.io-client": "^4.8.1",
+    "tesseract.js": "^6.0.1",
+    "ws": "^8.18.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
+    "electron": "^28.3.3",
+    "electron-builder": "^24.13.3",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1"
+  }
+}
