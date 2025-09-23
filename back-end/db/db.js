@@ -25,12 +25,6 @@ console.log('DB_PASSWORD:', process.env.DB_PASSWORD ? '***SET***' : 'NOT_SET');
 console.log('MYSQL_PASSWORD:', process.env.MYSQL_PASSWORD ? '***SET***' : 'NOT_SET');
 console.log('DB_DATABASE:', process.env.DB_DATABASE);
 console.log('MYSQL_DATABASE:', process.env.MYSQL_DATABASE);
-console.log('🔧 Final database config:', {
-    host: dbConfig.host,
-    user: dbConfig.user,
-    database: dbConfig.database,
-    port: dbConfig.port
-});
 
 // Force override DB_HOST if we're in production and have MYSQL_HOST
 if (process.env.NODE_ENV === 'production' && process.env.MYSQL_HOST && process.env.DB_HOST === 'localhost') {
@@ -57,6 +51,13 @@ if (process.env.NODE_ENV === 'production' && !process.env.MYSQL_DATABASE) {
     console.log('🔧 FORCING PSPD database in production!');
     dbConfig.database = 'PSPD';
 }
+
+console.log('🔧 Final database config:', {
+    host: dbConfig.host,
+    user: dbConfig.user,
+    database: dbConfig.database,
+    port: dbConfig.port
+});
 
 // If MYSQL_URL is provided, parse it
 if (process.env.MYSQL_URL) {
