@@ -53,7 +53,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch('http://localhost:3000/logout', {
+            const response = await fetch(`${window.location.origin}/logout`, {
                 method: 'POST',
                 credentials: 'include'
             });

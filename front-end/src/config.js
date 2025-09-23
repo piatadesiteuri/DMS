@@ -1,9 +1,9 @@
 const config = {
-  apiUrl: process.env.REACT_APP_ENV === 'production' 
-    ? 'http://192.168.0.13:3003'
+  apiUrl: process.env.NODE_ENV === 'production' || process.env.REACT_APP_ENV === 'production'
+    ? window.location.origin  // Use same domain as frontend in production
     : 'http://localhost:3000',
-  frontendUrl: process.env.REACT_APP_ENV === 'production'
-    ? 'http://192.168.0.13:3002'
+  frontendUrl: process.env.NODE_ENV === 'production' || process.env.REACT_APP_ENV === 'production'
+    ? window.location.origin  // Use same domain as frontend in production  
     : 'http://localhost:3001',
   
   // Alternative IP configuration

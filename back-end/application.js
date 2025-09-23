@@ -58,11 +58,15 @@ app.use(cors({
 			'http://192.168.0.13:3000',
 			'http://192.168.0.13:3002',
     'http://192.168.0.13:3003',
+			// Railway deployment domain
+			'https://dms-production-2ce3.up.railway.app',
 			// Allow access from any IP in local network
 			/^http:\/\/192\.168\.0\.\d+:3002$/,
 			/^http:\/\/192\.168\.1\.\d+:3002$/,
 			/^http:\/\/10\.\d+\.\d+\.\d+:3002$/,
-			/^http:\/\/172\.16\.\d+\.\d+:3002$/
+			/^http:\/\/172\.16\.\d+\.\d+:3002$/,
+			// Railway pattern for any Railway subdomain
+			/^https:\/\/.*\.up\.railway\.app$/
 		];
 		// Allow requests with no origin (like mobile apps or curl requests)
 		if (!origin) return callback(null, true);
@@ -719,7 +723,11 @@ const httpServer = createServer(app);
 const io = new Server(httpServer, {
 	cors: {
 		origin: process.env.NODE_ENV === 'production' 
-			? ['http://192.168.1.3:3002', 'http://192.168.1.3']
+			? [
+				'https://dms-production-2ce3.up.railway.app',
+				'http://192.168.1.3:3002', 
+				'http://192.168.1.3'
+			]
 			: ['http://localhost:3001', 'http://localhost:3000'],
 		methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 		credentials: true,

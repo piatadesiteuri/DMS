@@ -62,7 +62,7 @@ const Search = () => {
     // Fetch available tags when component mounts
     const fetchTags = async () => {
       try {
-        const response = await fetch('http://localhost:3000/tags', {
+        const response = await fetch(`${window.location.origin}/tags`, {
           credentials: 'include'
         });
         if (response.ok) {
@@ -82,7 +82,7 @@ const Search = () => {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:3000/search', {
+      const response = await fetch(`${window.location.origin}/search`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -404,7 +404,7 @@ const Search = () => {
                             colorScheme="blue"
                             variant="ghost"
                             size="sm"
-                            onClick={() => window.open(`http://localhost:3000/view/${doc.nom_document}`, '_blank')}
+                            onClick={() => window.open(`${window.location.origin}/view/${doc.nom_document}`, '_blank')}
                           >
                             View
                           </Button>
@@ -413,7 +413,7 @@ const Search = () => {
                             colorScheme="green"
                             variant="ghost"
                             size="sm"
-                            onClick={() => window.open(`http://localhost:3000/download/${doc.nom_document}`, '_blank')}
+                            onClick={() => window.open(`${window.location.origin}/download/${doc.nom_document}`, '_blank')}
                           >
                             Download
                           </Button>

@@ -140,7 +140,7 @@ if (fname === "" || lname === "" || email === "" || password === "") {
 
 
             e.preventDefault();
-            const res = await fetch('http://localhost:3000/register',{
+            const res = await fetch(`${window.location.origin}/register`,{
                 method : 'POST', headers : {
                     "Content-Type" : "application/json"
                 },body : JSON.stringify({
