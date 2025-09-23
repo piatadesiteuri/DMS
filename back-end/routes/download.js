@@ -18,11 +18,6 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Force railway database in production
-if (process.env.NODE_ENV === 'production') {
-  pool.config.connectionConfig.database = 'railway';
-}
-
 route.get('/:filename', async function (req, res) {
   console.log("---------------------------------------");
   console.log("GET request received at /download/:filename");

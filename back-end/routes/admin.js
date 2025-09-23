@@ -26,11 +26,6 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Force railway database in production
-if (process.env.NODE_ENV === 'production') {
-  pool.config.connectionConfig.database = 'railway';
-}
-
 // Get all users
 router.get('/users', async (req, res) => {
   try {
