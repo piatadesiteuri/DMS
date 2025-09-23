@@ -1,0 +1,170 @@
+/* Impersonation Banner Animations */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.impersonation-banner {
+  animation: slideDown 0.3s ease-out;
+}
+
+.impersonation-banner.exiting {
+  animation: slideUp 0.3s ease-in;
+}
+
+.shimmer-effect {
+  animation: shimmer 2s infinite;
+}
+
+.pulse-effect {
+  animation: pulse 2s infinite;
+}
+
+/* Modern button hover effects */
+.impersonation-button {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.impersonation-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.impersonation-button:active {
+  transform: translateY(0);
+}
+
+/* Backdrop blur effect */
+.impersonation-backdrop {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Custom scrollbar for modal if needed */
+.impersonation-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.impersonation-modal-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.impersonation-modal-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+
+.impersonation-modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Ensure banner is above everything */
+.impersonation-banner-container {
+  z-index: 9999 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+/* Smooth transitions for content margin */
+.content-with-banner {
+  transition: margin-top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading spinner for impersonation */
+.impersonation-loading {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .impersonation-banner {
+    padding: 12px 16px;
+  }
+  
+  .impersonation-banner .user-info {
+    display: none;
+  }
+  
+  .impersonation-banner .button-text {
+    display: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .impersonation-banner {
+    background: linear-gradient(135deg, #4C1D95 0%, #312E81 100%);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .impersonation-banner {
+    border: 2px solid white;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .impersonation-banner,
+  .impersonation-button,
+  .content-with-banner {
+    animation: none;
+    transition: none;
+  }
+  
+  .shimmer-effect,
+  .pulse-effect {
+    animation: none;
+  }
+} 
