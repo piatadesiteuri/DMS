@@ -621,7 +621,7 @@ route.post('/start-sync-agent', (req, res) => {
                 cwd: syncAgentPath,
                 env: {
                     ...process.env,
-                    API_URL: 'http://localhost:3001',
+                    API_URL: process.env.API_URL || `http://localhost:${process.env.PORT || 3001}`,
                     USER_ID: req.session.id_user
                 }
             });

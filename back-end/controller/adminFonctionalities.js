@@ -39,7 +39,7 @@ async function acceptUser(req, res) {
         const userEmail = results[0].email;
 
         // Simple confirmation URL without JWT
-        const url = `http://localhost:3000/confirmation/${id}`;
+        const url = `${process.env.APP_URL || 'http://localhost:3000'}/confirmation/${id}`;
 
         await transporter.sendMail({
             to: userEmail,

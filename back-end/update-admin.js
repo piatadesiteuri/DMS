@@ -5,9 +5,10 @@ const { dbUpdateUser } = require('./db/db');
 async function updateAdmin() {
   // Create the connection
   const connection = await mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'digital_documents_db'
+    host: process.env.DB_HOST || process.env.MYSQL_HOST || 'localhost',
+    user: process.env.DB_USER || process.env.MYSQL_USER || 'root',
+    password: process.env.DB_PASSWORD || process.env.MYSQL_PASSWORD || '',
+    database: process.env.DB_DATABASE || process.env.MYSQL_DATABASE || 'digital_documents_db'
   });
 
   try {
