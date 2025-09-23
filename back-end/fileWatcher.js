@@ -34,9 +34,12 @@ class FileWatcher {
 
         // Handle directory creation
         this.watcher.on('addDir', (dirPath) => {
-            console.log('=== Directory Created Event ===');
-            console.log('Directory path:', dirPath);
-            console.log('Full path:', path.resolve(dirPath));
+            // Reduce logging in production
+            if (process.env.NODE_ENV !== 'production') {
+                console.log('=== Directory Created Event ===');
+                console.log('Directory path:', dirPath);
+                console.log('Full path:', path.resolve(dirPath));
+            }
             
             const relativePath = path.relative(this.basePath, dirPath);
             this.folderCache.add(relativePath);
@@ -46,15 +49,20 @@ class FileWatcher {
                 folderPath: relativePath,
                 timestamp: new Date().toISOString()
             };
-            console.log('Emitting create_folder event:', eventData);
+            
+            if (process.env.NODE_ENV !== 'production') {
+                console.log('Emitting create_folder event:', eventData);
+            }
             this.io.emit('fileSystemUpdate', eventData);
         });
 
         // Handle directory removal
         this.watcher.on('unlinkDir', (dirPath) => {
-            console.log('=== Directory Removed Event ===');
-            console.log('Directory path:', dirPath);
-            console.log('Full path:', path.resolve(dirPath));
+            if (process.env.NODE_ENV !== 'production') {
+                console.log('=== Directory Removed Event ===');
+                console.log('Directory path:', dirPath);
+                console.log('Full path:', path.resolve(dirPath));
+            }
             
             const relativePath = path.relative(this.basePath, dirPath);
             this.folderCache.delete(relativePath);
@@ -64,15 +72,20 @@ class FileWatcher {
                 folderPath: relativePath,
                 timestamp: new Date().toISOString()
             };
-            console.log('Emitting remove_folder event:', eventData);
+            
+            if (process.env.NODE_ENV !== 'production') {
+                console.log('Emitting remove_folder event:', eventData);
+            }
             this.io.emit('fileSystemUpdate', eventData);
         });
 
         // Handle file moves
         this.watcher.on('unlink', (filePath) => {
-            console.log('=== File Deleted Event ===');
-            console.log('File path:', filePath);
-            console.log('Full path:', path.resolve(filePath));
+            if (process.env.NODE_ENV !== 'production') {
+                console.log('=== File Deleted Event ===');
+                console.log('File path:', filePath);
+                console.log('Full path:', path.resolve(filePath));
+            }
             
             // Verifică dacă fișierul există în cache
             const cachedFile = this.fileCache.get(filePath);
@@ -94,10 +107,12 @@ class FileWatcher {
             // Set a timeout to handle the case where a file is deleted but not moved
             this.moveTimeout = setTimeout(() => {
                 if (this.lastDeletedFile && this.lastDeletedFile.path === filePath) {
-                    console.log('=== File Deleted (Not Moved) ===');
-                    console.log('File path:', filePath);
-                    const folder = path.basename(path.dirname(filePath));
-                                    console.log('Folder:', folder);
+                    if (process.env.NODE_ENV !== 'production') {
+                        console.log('=== File Deleted (Not Moved) ===');
+                        console.log('File path:', filePath);
+                        const folder = path.basename(path.dirname(filePath));
+                        console.log('Folder:', folder);
+                    }
                 
                 const eventData = {
                     type: 'delete',
@@ -105,7 +120,9 @@ class FileWatcher {
                     targetFolder: path.dirname(filePath), // Send full folder path instead of just name
                     timestamp: new Date().toISOString()
                 };
-                    console.log('Emitting delete event:', eventData);
+                    if (process.env.NODE_ENV !== 'production') {
+                        console.log('Emitting delete event:', eventData);
+                    }
                     this.io.emit('fileSystemUpdate', eventData);
                     
                     this.lastDeletedFile = null;
@@ -115,10 +132,12 @@ class FileWatcher {
         });
 
         this.watcher.on('add', (filePath, stats) => {
-            console.log('=== File Added Event ===');
-            console.log('File path:', filePath);
-            console.log('Full path:', path.resolve(filePath));
-            console.log('File stats:', stats);
+            if (process.env.NODE_ENV !== 'production') {
+                console.log('=== File Added Event ===');
+                console.log('File path:', filePath);
+                console.log('Full path:', path.resolve(filePath));
+                console.log('File stats:', stats);
+            }
             
             const newFile = {
                 path: filePath,
@@ -135,11 +154,13 @@ class FileWatcher {
                 const sourceFolder = this.lastDeletedFile.folder;
                 const targetFolder = path.dirname(filePath); // Send full folder path instead of just name
                 
-                console.log('=== File Move Detected ===');
-                console.log('From:', this.lastDeletedFile.path);
-                console.log('To:', filePath);
-                console.log('Source Folder:', sourceFolder);
-                console.log('Target Folder:', targetFolder);
+                if (process.env.NODE_ENV !== 'production') {
+                    console.log('=== File Move Detected ===');
+                    console.log('From:', this.lastDeletedFile.path);
+                    console.log('To:', filePath);
+                    console.log('Source Folder:', sourceFolder);
+                    console.log('Target Folder:', targetFolder);
+                }
 
                 // Clear the move timeout since we've detected a move
                 if (this.moveTimeout) {
@@ -154,7 +175,9 @@ class FileWatcher {
                     targetFolder: targetFolder,
                     timestamp: new Date().toISOString()
                 };
-                console.log('Emitting move event:', eventData);
+                if (process.env.NODE_ENV !== 'production') {
+                    console.log('Emitting move event:', eventData);
+                }
                 this.io.emit('fileSystemUpdate', eventData);
 
                 // Reset the move tracking
@@ -162,9 +185,11 @@ class FileWatcher {
                 this.lastDeletedTime = null;
             } else {
                 // This is a new file
-                console.log('=== New File Detected ===');
-                console.log('File path:', filePath);
-                console.log('Folder:', newFile.folder);
+                if (process.env.NODE_ENV !== 'production') {
+                    console.log('=== New File Detected ===');
+                    console.log('File path:', filePath);
+                    console.log('Folder:', newFile.folder);
+                }
                 
                 const eventData = {
                     type: 'add',
@@ -172,7 +197,9 @@ class FileWatcher {
                     targetFolder: path.dirname(filePath), // Send full folder path instead of just name
                     timestamp: new Date().toISOString()
                 };
-                console.log('Emitting add event:', eventData);
+                if (process.env.NODE_ENV !== 'production') {
+                    console.log('Emitting add event:', eventData);
+                }
                 this.io.emit('fileSystemUpdate', eventData);
             }
 
@@ -181,9 +208,11 @@ class FileWatcher {
         });
 
         this.watcher.on('ready', () => {
-            console.log('=== File System Watcher Ready ===');
-            console.log('Watching path:', watchPath);
-            console.log('Initial folder cache:', Array.from(this.folderCache));
+            if (process.env.NODE_ENV !== 'production') {
+                console.log('=== File System Watcher Ready ===');
+                console.log('Watching path:', watchPath);
+                console.log('Initial folder cache:', Array.from(this.folderCache));
+            }
         });
 
         this.watcher.on('error', (error) => {
@@ -209,7 +238,11 @@ class FileWatcher {
 
         try {
             scanDirectory(basePath);
-            console.log('Initialized folder cache with', this.folderCache.size, 'folders');
+            if (process.env.NODE_ENV !== 'production') {
+                console.log('Initialized folder cache with', this.folderCache.size, 'folders');
+            } else {
+                console.log('FileWatcher initialized and started');
+            }
         } catch (error) {
             console.error('Error initializing folder cache:', error);
         }
