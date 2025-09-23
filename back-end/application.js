@@ -1,6 +1,10 @@
-require('dotenv').config({ 
-	path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.database' 
-});
+// Load environment variables only in development
+// Skip loading .env files in production (Railway) to avoid overriding Railway variables
+if (process.env.NODE_ENV !== 'production') {
+	require('dotenv').config({ 
+		path: '.env.database' 
+	});
+}
 const express = require("express")
 const app = express()
 const port = process.env.NODE_ENV === 'production' ? 3003 : 3000

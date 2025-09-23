@@ -5,7 +5,10 @@ const db = require('../db/db');
 const nodemailer = require('nodemailer');
 const session = require('express-session');
 const route_admin = express.Router();
-const dotenv = require('dotenv').config({ path: '.env.mailer' }); // Load dotenv configuration
+// Load dotenv configuration only in development
+if (process.env.NODE_ENV !== 'production') {
+    const dotenv = require('dotenv').config({ path: '.env.mailer' });
+}
 
 async function deleteUser(req, res) {
     const idd = req.body.e;

@@ -9,8 +9,10 @@ const dotenv = require('dotenv');
 const path = require('path');
 const db = require('../db/db');
 
-// Load environment variables
-dotenv.config({ path: path.join(__dirname, '../.env.database') });
+// Load environment variables only in development
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config({ path: path.join(__dirname, '../.env.database') });
+}
 
 // Create a connection pool
 const pool = mysql.createPool({
