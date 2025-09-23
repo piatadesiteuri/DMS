@@ -19,6 +19,7 @@ import {
 } from "../ui/alert-dialog"
 
 import Toast from "../ui/toast"
+import config from '../config'
 
 import React, { useState, useEffect, useRef } from 'react'
 
@@ -39,7 +40,7 @@ const AcceptedUsrTbl = () => {
     const rolesRef = useRef({});
 
     useEffect(() => {
-        fetch('http://localhost:3000/admin/modify', {
+        fetch(`${config.apiUrl}/admin/modify`, {
             credentials: 'include'
         }).then(res => res.json()).then(results => {
             setTableData(results);
@@ -103,7 +104,7 @@ const AcceptedUsrTbl = () => {
     async function updateUser(userId) {
         try {
             const userChanges = changes[userId];
-            const res = await fetch('http://localhost:3000/admin/update-user', {
+            const res = await fetch(`${config.apiUrl}/admin/update-user`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -121,7 +122,7 @@ const AcceptedUsrTbl = () => {
 
             if (res.ok) {
                 // Refresh the table data
-                const updatedData = await fetch('http://localhost:3000/admin/modify', {
+                const updatedData = await fetch(`${config.apiUrl}/admin/modify`, {
                     credentials: 'include'
                 }).then(res => res.json());
                 setTableData(updatedData);
@@ -144,7 +145,7 @@ const AcceptedUsrTbl = () => {
 
     async function blockUser(userId) {
         try {
-            const res = await fetch('http://localhost:3000/admin/block-user', {
+            const res = await fetch(`${config.apiUrl}/admin/block-user`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -156,7 +157,7 @@ const AcceptedUsrTbl = () => {
             });
             
             if (res.ok) {
-                const updatedData = await fetch('http://localhost:3000/admin/modify', {
+                const updatedData = await fetch(`${config.apiUrl}/admin/modify`, {
                     credentials: 'include'
                 }).then(res => res.json());
                 setTableData(updatedData);

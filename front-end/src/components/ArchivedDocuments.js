@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import config from '../config';
 
 const ArchivedDocuments = () => {
     const [archivedDocs, setArchivedDocs] = useState({ allDocuments: [], userDocuments: [] });
@@ -16,7 +17,7 @@ const ArchivedDocuments = () => {
     const fetchArchivedDocuments = async () => {
         try {
             console.log("Fetching archived documents...");
-            const response = await axios.get('http://localhost:3000/api/archived-documents');
+            const response = await axios.get(`${config.apiUrl}/api/archived-documents`);
             console.log('Archived documents fetched successfully:', response.data);
             
             // Set the documents directly from the response
@@ -39,7 +40,7 @@ const ArchivedDocuments = () => {
 
     const handleRestore = async (documentId, versionId) => {
         try {
-            await axios.post(`http://localhost:3000/api/restore-version/${documentId}/${versionId}`);
+            await axios.post(`${config.apiUrl}/api/restore-version/${documentId}/${versionId}`);
             toast.success('Document restored successfully');
             fetchArchivedDocuments(); // Refresh the list
         } catch (error) {

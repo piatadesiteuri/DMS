@@ -13,6 +13,7 @@ import {
   Spinner,
   useToast
 } from '@chakra-ui/react';
+import config from '../config';
 
 const UserLogs = () => {
   const [logs, setLogs] = useState([]);
@@ -36,7 +37,7 @@ const UserLogs = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/admin/users');
+      const response = await fetch(`${config.apiUrl}/api/admin/users`);
       const data = await response.json();
       if (data.success) {
         setUsers(data.users);
@@ -57,8 +58,8 @@ const UserLogs = () => {
     try {
       setLoading(true);
       const url = userId
-        ? `http://localhost:3000/api/admin/user-logs?userId=${userId}`
-        : 'http://localhost:3000/api/admin/user-logs';
+        ? `${config.apiUrl}/api/admin/user-logs?userId=${userId}`
+        : `${config.apiUrl}/api/admin/user-logs`;
       const response = await fetch(url);
       const data = await response.json();
       if (data.success) {
