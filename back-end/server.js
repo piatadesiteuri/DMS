@@ -20,7 +20,14 @@ const httpServer = createServer(app);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-    origin: ['http://localhost:3001', 'http://localhost:3002', 'http://192.168.0.123:3001', 'http://192.168.0.124:3001', 'http://188.26.101.33:3002', 'http://188.26.101.33:3003', 'http://192.168.0.13:3000', 'file://', 'file://*'],
+    origin: [
+        'http://localhost:3001', 'http://localhost:3002', 'http://localhost:3000',
+        'http://192.168.0.123:3001', 'http://192.168.0.124:3001', 
+        'http://188.26.101.33:3002', 'http://188.26.101.33:3003', 'http://192.168.0.13:3000',
+        'file://', 'file://*',
+        // Railway domains
+        /\.railway\.app$/, /\.up\.railway\.app$/
+    ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'X-Requested-With', 'Accept'],
@@ -69,7 +76,12 @@ const userRouter = require('./routes/user');
 // Socket.IO configuration
 const io = new Server(httpServer, {
     cors: {
-        origin: ['http://localhost:3001', 'http://localhost:3002', 'http://localhost:3000', 'file://', 'file://*'],
+        origin: [
+            'http://localhost:3001', 'http://localhost:3002', 'http://localhost:3000',
+            'file://', 'file://*',
+            // Railway domains
+            /\.railway\.app$/, /\.up\.railway\.app$/
+        ],
         credentials: true,
         methods: ['GET', 'POST']
     },
