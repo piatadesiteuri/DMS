@@ -157,6 +157,7 @@ const createTablesQuery = `
     FOREIGN KEY (type_id) REFERENCES document_types(id)
   );
 
+  -- Document versions table (no FK to table_document to keep deleted versions)
   CREATE TABLE IF NOT EXISTS document_versions (
     id_version INT AUTO_INCREMENT PRIMARY KEY,
     id_document INT NOT NULL,
@@ -167,7 +168,6 @@ const createTablesQuery = `
     created_by INT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     is_current BOOLEAN DEFAULT FALSE,
-    -- NOTE: Do not FK to table_document; we want to keep deleted versions even after the active row is removed
     FOREIGN KEY (created_by) REFERENCES user(id_user),
     FOREIGN KEY (type_id) REFERENCES document_types(id)
   );
