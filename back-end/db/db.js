@@ -33,17 +33,33 @@ if (process.env.NODE_ENV === 'production' && process.env.MYSQL_HOST && process.e
     console.log('🔧 DB_HOST after override:', process.env.DB_HOST);
 }
 
-// Database configuration
+// Database configuration - prioritize Railway environment variables
 const dbConfig = {
-    host: process.env.DB_HOST || process.env.MYSQL_HOST || process.env.MYSQL_URL?.split('@')[1]?.split('/')[0] || '127.0.0.1',
-    user: process.env.DB_USER || process.env.MYSQL_USER || process.env.MYSQL_URL?.split('//')[1]?.split(':')[0] || 'root',
-    password: process.env.DB_PASSWORD || process.env.MYSQL_PASSWORD || process.env.MYSQL_URL?.split('://')[1]?.split(':')[1]?.split('@')[0] || '',
-    database: process.env.DB_DATABASE || process.env.MYSQL_DATABASE || process.env.MYSQL_URL?.split('/').pop() || 'PSPD',
+    host: process.env.MYSQL_HOST || process.env.DB_HOST || '127.0.0.1',
+    user: process.env.MYSQL_USER || process.env.DB_USER || 'root',
+    password: process.env.MYSQL_PASSWORD || process.env.DB_PASSWORD || '',
+    database: process.env.MYSQL_DATABASE || process.env.DB_DATABASE || 'PSPD',
+    port: process.env.MYSQL_PORT || 3306,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
     connectTimeout: 30000 // Increase timeout to 30 seconds
 };
+
+// If MYSQL_URL is provided, parse it
+if (process.env.MYSQL_URL) {
+    try {
+        const url = new URL(process.env.MYSQL_URL);
+        dbConfig.host = url.hostname;
+        dbConfig.port = url.port || 3306;
+        dbConfig.user = url.username;
+        dbConfig.password = url.password;
+        dbConfig.database = url.pathname.slice(1); // Remove leading slash
+        console.log('🔗 Using MYSQL_URL for connection');
+    } catch (error) {
+        console.log('⚠️ Failed to parse MYSQL_URL:', error.message);
+    }
+}
 
 console.log('🔧 Final Database Config:');
 console.log('Host:', dbConfig.host);
