@@ -15,15 +15,23 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Debug environment variables
 console.log('🔍 Environment Variables Debug:');
-console.log('DB_HOST:', process.env.DB_HOST);
-console.log('MYSQL_HOST:', process.env.MYSQL_HOST);
-console.log('MYSQL_URL:', process.env.MYSQL_URL);
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('🚨 DB_HOST:', process.env.DB_HOST, '(source: unknown)');
+console.log('✅ MYSQL_HOST:', process.env.MYSQL_HOST);
+console.log('✅ MYSQL_URL:', process.env.MYSQL_URL);
 console.log('DB_USER:', process.env.DB_USER);
 console.log('MYSQL_USER:', process.env.MYSQL_USER);
 console.log('DB_PASSWORD:', process.env.DB_PASSWORD ? '***SET***' : 'NOT_SET');
 console.log('MYSQL_PASSWORD:', process.env.MYSQL_PASSWORD ? '***SET***' : 'NOT_SET');
 console.log('DB_DATABASE:', process.env.DB_DATABASE);
 console.log('MYSQL_DATABASE:', process.env.MYSQL_DATABASE);
+
+// Force override DB_HOST if we're in production and have MYSQL_HOST
+if (process.env.NODE_ENV === 'production' && process.env.MYSQL_HOST && process.env.DB_HOST === 'localhost') {
+    console.log('🔧 OVERRIDING DB_HOST in production!');
+    process.env.DB_HOST = process.env.MYSQL_HOST;
+    console.log('🔧 DB_HOST after override:', process.env.DB_HOST);
+}
 
 // Database configuration
 const dbConfig = {
