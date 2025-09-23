@@ -107,11 +107,12 @@ const sessionConfig = {
 	resave: true,
 	saveUninitialized: true,
 	cookie: {
-		secure: false,
+		secure: process.env.NODE_ENV === 'production', // HTTPS in production
 		httpOnly: true,
 		sameSite: 'lax',
 		maxAge: 24 * 60 * 60 * 1000, // 24 hours
-		domain: process.env.NODE_ENV === 'production' ? '192.168.0.13' : 'localhost'
+		// Don't set domain in production - let it default to the current domain
+		...(process.env.NODE_ENV !== 'production' && { domain: 'localhost' })
 	}
 };
 
