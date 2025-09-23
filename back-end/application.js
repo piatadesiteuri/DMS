@@ -532,11 +532,7 @@ app.use((err, req, res, next) => {
 	res.status(500).json({ error: 'Something broke!', details: err.message });
 });
 
-// 404 handler
-app.use((req, res) => {
-	console.log('404 for URL:', req.url);
-	res.status(404).json({ error: 'Not found' });
-});
+// 404 handler - MOVED TO AFTER REACT ROUTES
 
 // Servim fișierele PDF din directorul uploads
 app.get('/pdfs/uploads/*', (req, res) => {
@@ -1290,6 +1286,7 @@ app.use(express.static(path.join(__dirname, '../front-end/build')));
 
 // Serve React app for all non-API routes (must be last!)
 app.get('*', (req, res) => {
+	console.log('Serving React app for:', req.url);
 	res.sendFile(path.join(__dirname, '../front-end/build', 'index.html'));
 });
 
