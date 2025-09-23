@@ -25,6 +25,12 @@ console.log('DB_PASSWORD:', process.env.DB_PASSWORD ? '***SET***' : 'NOT_SET');
 console.log('MYSQL_PASSWORD:', process.env.MYSQL_PASSWORD ? '***SET***' : 'NOT_SET');
 console.log('DB_DATABASE:', process.env.DB_DATABASE);
 console.log('MYSQL_DATABASE:', process.env.MYSQL_DATABASE);
+console.log('🔧 Final database config:', {
+    host: dbConfig.host,
+    user: dbConfig.user,
+    database: dbConfig.database,
+    port: dbConfig.port
+});
 
 // Force override DB_HOST if we're in production and have MYSQL_HOST
 if (process.env.NODE_ENV === 'production' && process.env.MYSQL_HOST && process.env.DB_HOST === 'localhost') {
@@ -2860,10 +2866,20 @@ async function dbLogUserAction(userId, action, details = null, ipAddress = null,
 async function populateDatabase() {
     try {
         console.log('🚀 Starting database population...');
+        console.log('🔍 Database config being used:', {
+            host: dbConfig.host,
+            user: dbConfig.user,
+            database: dbConfig.database,
+            port: dbConfig.port
+        });
+        
         const con = await pool.getConnection();
+        console.log('✅ Successfully connected to database');
         
         // Check if we already have data
         const [userCount] = await con.query('SELECT COUNT(*) as count FROM user');
+        console.log('📊 Current user count:', userCount[0].count);
+        
         if (userCount[0].count > 0) {
             console.log('✅ Database already populated, skipping...');
             con.release();
