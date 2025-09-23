@@ -2957,8 +2957,21 @@ async function populateDatabase() {
 
 // Call populateDatabase after a short delay when the module loads
 setTimeout(() => {
+    console.log('🔄 Starting populateDatabase timer...');
     populateDatabase();
 }, 2000);
+
+// Test database connection immediately
+setTimeout(() => {
+    console.log('🧪 Testing database connection...');
+    pool.getConnection().then(con => {
+        console.log('✅ Database connection successful!');
+        console.log('📊 Database name:', con.config.database);
+        con.release();
+    }).catch(err => {
+        console.error('❌ Database connection failed:', err.message);
+    });
+}, 1000);
 
 // Export the new functions
 module.exports = {
