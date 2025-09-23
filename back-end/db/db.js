@@ -2856,11 +2856,94 @@ async function dbLogUserAction(userId, action, details = null, ipAddress = null,
     }
 }
 
+// Function to populate database with essential data
+async function populateDatabase() {
+    try {
+        console.log('🚀 Starting database population...');
+        const con = await pool.getConnection();
+        
+        // Check if we already have data
+        const [userCount] = await con.query('SELECT COUNT(*) as count FROM user');
+        if (userCount[0].count > 0) {
+            console.log('✅ Database already populated, skipping...');
+            con.release();
+            return;
+        }
+
+        console.log('📝 Creating essential data...');
+
+        // Create institutions
+        await con.query(`
+            INSERT IGNORE INTO institutions (id_institution, nom_institution, adresse, telephone, email) VALUES
+            (1, 'Default Institution', 'Default Address', '0000000000', 'admin@example.com'),
+            (2, 'Test Institution', 'Test Address', '1111111111', 'test@example.com'),
+            (3, 'Demo Institution', 'Demo Address', '2222222222', 'demo@example.com')
+        `);
+
+        // Create document types
+        await con.query(`
+            INSERT IGNORE INTO document_types (id, type_name, description, folder_path, institution_id) VALUES
+            (1, 'Official Document', 'Official documents', './uploads/Official Document', 1),
+            (2, 'Shared Document', 'Shared documents', './uploads/Shared Document', 1),
+            (3, 'General Document', 'General documents', './uploads/General Document', 1),
+            (4, 'Others', 'Other documents', './uploads/Others', 1)
+        `);
+
+        // Create document tags
+        await con.query(`
+            INSERT IGNORE INTO document_tags (id, tag_name, color, institution_id) VALUES
+            (1, 'Important', '#ff0000', 1),
+            (2, 'Urgent', '#ff8800', 1),
+            (3, 'Confidential', '#8800ff', 1),
+            (4, 'Public', '#00ff00', 1)
+        `);
+
+        // Create folders
+        await con.query(`
+            INSERT IGNORE INTO folders (id, folder_name, folder_path, created_by, institution_id, is_private) VALUES
+            (1, 'Official Documents', './uploads/Official Document', 1, 1, 0),
+            (2, 'Shared Documents', './uploads/Shared Document', 1, 1, 0),
+            (3, 'General Documents', './uploads/General Document', 1, 1, 0),
+            (4, 'Others', './uploads/Others', 1, 1, 0)
+        `);
+
+        // Create essential users
+        await con.query(`
+            INSERT IGNORE INTO user (id_user, prenom, nom, email, phone_number, password, diffuse, upload, download, print, roles, accepted, verified, created_by, current_plan_id, institution_id, subscription_status) VALUES
+            (1, 'Admin', 'System', 'admin@example.com', NULL, '$2b$10$qqka0E2SE1vltY1WfhwBleZ0R9IGD7iHVSI2b84ZIMcPiSXki51z', 1, 1, 1, 1, 'admin', 1, 1, 20, 1, 1, 'free'),
+            (20, 'Super', 'Admin', 'superadmin@example.com', NULL, '$2b$10$t2mah5/R2eA/UTJCBD2w/.26tkqwkNKo9N.e1Xwp6tO4HSGrn9.Ty', 1, 1, 1, 1, 'superadmin', 1, 1, NULL, 2, 3, 'free'),
+            (25, 'Raul', 'Rusescu', 'raulrusescu@gmail.com', '0734342342', '$2b$10$O1b.JK3ir2ooEu5sfOtoWuNF9tsTdwbfS0/r2wv7hcKyT0CU1bYpa', 1, 1, 1, 1, 'user', 1, 1, 20, 2, 3, 'free')
+        `);
+
+        // Show what was created
+        const [users] = await con.query('SELECT COUNT(*) as count FROM user');
+        const [institutions] = await con.query('SELECT COUNT(*) as count FROM institutions');
+        const [folders] = await con.query('SELECT COUNT(*) as count FROM folders');
+        const [documentTypes] = await con.query('SELECT COUNT(*) as count FROM document_types');
+
+        console.log('✅ Database populated successfully:');
+        console.log(`👥 Users: ${users[0].count}`);
+        console.log(`🏢 Institutions: ${institutions[0].count}`);
+        console.log(`📁 Folders: ${folders[0].count}`);
+        console.log(`📄 Document Types: ${documentTypes[0].count}`);
+
+        con.release();
+    } catch (error) {
+        console.error('❌ Error populating database:', error.message);
+    }
+}
+
+// Call populateDatabase after a short delay when the module loads
+setTimeout(() => {
+    populateDatabase();
+}, 2000);
+
 // Export the new functions
 module.exports = {
     pool,
     sessionStore,
     initializeDatabase,
+    populateDatabase,
     getConnection: () => pool.getConnection(),
     dbCountDocAdded,
     dbListDocuments,
