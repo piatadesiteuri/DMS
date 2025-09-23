@@ -1287,7 +1287,20 @@ app.use(express.static(path.join(__dirname, '../front-end/build')));
 // Serve React app for all non-API routes (must be last!)
 app.get('*', (req, res) => {
 	console.log('Serving React app for:', req.url);
-	res.sendFile(path.join(__dirname, '../front-end/build', 'index.html'));
+	// In Docker: __dirname = /app, so we need ./front-end/build/index.html
+	const indexPath = path.join(__dirname, '../front-end/build', 'index.html');
+	console.log('Looking for index.html at:', indexPath);
+	console.log('File exists:', require('fs').existsSync(indexPath));
+	console.log('__dirname is:', __dirname);
+	
+	// Try alternative path for Docker environment
+	const dockerPath = path.join('/app', 'front-end', 'build', 'index.html');
+	console.log('Trying Docker path:', dockerPath);
+	console.log('Docker file exists:', require('fs').existsSync(dockerPath));
+	
+	const finalPath = require('fs').existsSync(dockerPath) ? dockerPath : indexPath;
+	console.log('Using final path:', finalPath);
+	res.sendFile(finalPath);
 });
 
 module.exports = app;
