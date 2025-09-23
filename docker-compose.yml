@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  database:
+    image: mysql:8.0
+    container_name: dms_database
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: pspd
+      MYSQL_USER: dms_user
+      MYSQL_PASSWORD: dms_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./pspd_database_dump.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - dms_network
+
+  # Backend API
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: dms_backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      DB_HOST: database
+      DB_USER: dms_user
+      DB_PASSWORD: dms_password
+      DB_NAME: pspd
+      JWT_SECRET: your_jwt_secret_here
+    ports:
+      - "3001:3001"
+    depends_on:
+      - database
+    volumes:
+      - ./back-end/uploads:/app/uploads
+    networks:
+      - dms_network
+
+  # Frontend React App
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: dms_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - dms_network
+
+volumes:
+  mysql_data:
+
+networks:
+  dms_network:
+    driver: bridge
