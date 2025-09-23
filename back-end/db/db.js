@@ -10,17 +10,35 @@ dotenv.config({
     path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.database' 
 });
 
+// Debug environment variables
+console.log('🔍 Environment Variables Debug:');
+console.log('DB_HOST:', process.env.DB_HOST);
+console.log('MYSQL_HOST:', process.env.MYSQL_HOST);
+console.log('MYSQL_URL:', process.env.MYSQL_URL);
+console.log('DB_USER:', process.env.DB_USER);
+console.log('MYSQL_USER:', process.env.MYSQL_USER);
+console.log('DB_PASSWORD:', process.env.DB_PASSWORD ? '***SET***' : 'NOT_SET');
+console.log('MYSQL_PASSWORD:', process.env.MYSQL_PASSWORD ? '***SET***' : 'NOT_SET');
+console.log('DB_DATABASE:', process.env.DB_DATABASE);
+console.log('MYSQL_DATABASE:', process.env.MYSQL_DATABASE);
+
 // Database configuration
 const dbConfig = {
-    host: process.env.DB_HOST || process.env.MYSQL_HOST || '127.0.0.1',
-    user: process.env.DB_USER || process.env.MYSQL_USER || 'root',
-    password: process.env.DB_PASSWORD || process.env.MYSQL_PASSWORD || '',
-    database: process.env.DB_DATABASE || process.env.MYSQL_DATABASE || 'PSPD',
+    host: process.env.DB_HOST || process.env.MYSQL_HOST || process.env.MYSQL_URL?.split('@')[1]?.split('/')[0] || '127.0.0.1',
+    user: process.env.DB_USER || process.env.MYSQL_USER || process.env.MYSQL_URL?.split('//')[1]?.split(':')[0] || 'root',
+    password: process.env.DB_PASSWORD || process.env.MYSQL_PASSWORD || process.env.MYSQL_URL?.split('://')[1]?.split(':')[1]?.split('@')[0] || '',
+    database: process.env.DB_DATABASE || process.env.MYSQL_DATABASE || process.env.MYSQL_URL?.split('/').pop() || 'PSPD',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
     connectTimeout: 30000 // Increase timeout to 30 seconds
 };
+
+console.log('🔧 Final Database Config:');
+console.log('Host:', dbConfig.host);
+console.log('User:', dbConfig.user);
+console.log('Password:', dbConfig.password ? '***SET***' : 'NOT_SET');
+console.log('Database:', dbConfig.database);
 
 // Create connection pool
 const pool = mysql.createPool(dbConfig);
