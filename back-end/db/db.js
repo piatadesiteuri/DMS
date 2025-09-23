@@ -6,9 +6,12 @@ const path = require('path');
 const fs = require('fs');
 
 // Load environment variables based on NODE_ENV
-dotenv.config({ 
-    path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.database' 
-});
+// Skip loading .env files in production (Railway) to avoid overriding Railway variables
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config({ 
+        path: '.env.database' 
+    });
+}
 
 // Debug environment variables
 console.log('🔍 Environment Variables Debug:');
