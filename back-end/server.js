@@ -36,11 +36,11 @@ app.use(cors({
 
 // Session configuration
 const sessionStore = new MySQLStore({
-    host: '127.0.0.1',
+    host: process.env.DB_HOST || process.env.MYSQL_HOST || '127.0.0.1',
     port: 3306,
-    user: 'root',
-    password: '',
-    database: 'digital_documents_db',
+    user: process.env.DB_USER || process.env.MYSQL_USER || 'root',
+    password: process.env.DB_PASSWORD || process.env.MYSQL_PASSWORD || '',
+    database: process.env.DB_DATABASE || process.env.MYSQL_DATABASE || 'digital_documents_db',
     createDatabaseTable: true,
     schema: {
         tableName: 'sessions',
