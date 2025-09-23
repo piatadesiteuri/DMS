@@ -1,0 +1,38 @@
+-- MySQL dump 10.13  Distrib 8.4.5, for macos13.7 (arm64)
+--
+-- Host: localhost    Database: PSPD
+-- ------------------------------------------------------
+-- Server version	9.3.0
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Dumping data for table `document_types`
+--
+-- WHERE:  1=1
+
+LOCK TABLES `document_types` WRITE;
+/*!40000 ALTER TABLE `document_types` DISABLE KEYS */;
+INSERT INTO `document_types` (`id`, `type_name`, `description`, `folder_path`, `created_at`, `institution_id`) VALUES (1,'Official Document','Official documents and reports',NULL,'2025-04-01 11:36:02',3),(2,'Shared Document','Documents shared between users',NULL,'2025-04-01 11:36:02',3),(3,'t1','Type 1 documents',NULL,'2025-04-01 11:36:02',3),(4,'t2','Type 2 documents',NULL,'2025-04-01 11:36:02',3),(5,'t3','Type 3 documents',NULL,'2025-04-01 11:36:02',3),(6,'t4','Type 4 documents',NULL,'2025-04-01 11:36:02',3),(8,'Classified Document',NULL,NULL,'2025-04-01 12:03:06',3),(10,'t12',NULL,NULL,'2025-04-02 05:48:59',NULL),(11,'Others',NULL,NULL,'2025-04-02 05:54:49',3),(12,'tt',NULL,NULL,'2025-04-02 05:56:29',3),(14,'TestType',NULL,NULL,'2025-04-02 07:28:58',NULL),(15,'TestType2',NULL,NULL,'2025-04-02 07:31:49',NULL),(16,'TestType3',NULL,NULL,'2025-04-02 07:33:51',NULL),(17,'TestType4',NULL,NULL,'2025-04-02 07:34:12',NULL),(19,'testtest2',NULL,NULL,'2025-04-02 07:52:46',NULL),(21,'typetest55',NULL,NULL,'2025-04-02 08:08:52',NULL),(23,'TypeDeTestat',NULL,NULL,'2025-04-02 10:52:20',3),(26,'AlexType',NULL,NULL,'2025-04-02 12:15:52',3),(27,'AlexTypeTest',NULL,'AlexFolder','2025-04-03 06:17:58',3),(28,'TipDeNew',NULL,'AlexFolder','2025-04-03 13:48:29',3);
+/*!40000 ALTER TABLE `document_types` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-09-23 21:42:30
