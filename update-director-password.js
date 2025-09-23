@@ -6,7 +6,7 @@ async function updateDirectorPassword() {
   const connection = await mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    database: 'digital_documents_db'
+    database: process.env.MYSQL_DATABASE || process.env.DB_DATABASE || 'railway'
   });
 
   try {

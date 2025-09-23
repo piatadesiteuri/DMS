@@ -44,7 +44,7 @@ const sessionStore = new MySQLStore({
     port: 3306,
     user: process.env.DB_USER || process.env.MYSQL_USER || 'root',
     password: process.env.DB_PASSWORD || process.env.MYSQL_PASSWORD || '',
-    database: process.env.DB_DATABASE || process.env.MYSQL_DATABASE || 'digital_documents_db',
+    database: process.env.MYSQL_DATABASE || process.env.DB_DATABASE || 'railway',
     createDatabaseTable: true,
     schema: {
         tableName: 'sessions',
