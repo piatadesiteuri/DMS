@@ -127,6 +127,16 @@ const createTablesQuery = `
     FOREIGN KEY (user_id) REFERENCES user(id_user)
   );
 
+  CREATE TABLE IF NOT EXISTS document_types (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type_name VARCHAR(255) NOT NULL UNIQUE,
+    description TEXT,
+    folder_path VARCHAR(255) DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    institution_id INT DEFAULT NULL,
+    FOREIGN KEY (institution_id) REFERENCES institutions(id_institution)
+  );
+
   CREATE TABLE IF NOT EXISTS table_document (
     id_document INT AUTO_INCREMENT PRIMARY KEY,
     nom_document VARCHAR(255) NOT NULL,
@@ -288,6 +298,23 @@ async function initializeDatabase() {
             }
             
             console.log('Missing tables created successfully');
+            
+            // Insert default document types if they don't exist
+            const [typeCheck] = await connection.query(
+                "SELECT COUNT(*) as count FROM document_types"
+            );
+            
+            if (typeCheck[0].count === 0) {
+                console.log('Adding default document types...');
+                await connection.query(`
+                    INSERT INTO document_types (type_name, description) VALUES
+                    ('Official Document', 'Official documents and reports'),
+                    ('Shared Document', 'Documents shared between users'),
+                    ('General Document', 'General purpose documents'),
+                    ('Others', 'Other document types')
+                `);
+                console.log('Default document types added successfully');
+            }
         } else {
             console.log('All required tables already exist');
         }
