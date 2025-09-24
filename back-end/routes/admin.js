@@ -597,7 +597,7 @@ router.get('/statistics/activity', async (req, res) => {
 // Get all documents
 router.get('/documents', async (req, res) => {
   try {
-    const userId = req.session.userId;
+    const userId = req.session.id_user;
 
     // Get user's institution
     const [userInstitution] = await pool.query(
@@ -656,7 +656,7 @@ router.get('/documents', async (req, res) => {
 // Get documents from public folders for admin
 router.get('/documents/public', async (req, res) => {
   try {
-    const userId = req.session.userId;
+    const userId = req.session.id_user;
 
     // Get user's institution and role
     const [userInfo] = await pool.query(
@@ -717,7 +717,7 @@ router.get('/documents/public', async (req, res) => {
 // Get admin profile with institution info
 router.get('/profile', authenticateToken, async (req, res) => {
   try {
-    const userId = req.session.userId;
+    const userId = req.session.id_user;
     
     const [admin] = await pool.query(
       'SELECT u.*, i.name as institution_name FROM users u JOIN institutions i ON u.institution_id = i.id WHERE u.id = ? AND u.role = "admin"',
@@ -746,7 +746,7 @@ router.get('/profile', authenticateToken, async (req, res) => {
 router.get('/documents/institution/:institutionId', async (req, res) => {
   try {
     const { institutionId } = req.params;
-    const userId = req.session.userId;
+    const userId = req.session.id_user;
 
     // Verifică dacă utilizatorul aparține instituției
     const [user] = await pool.query(
@@ -781,7 +781,7 @@ router.get('/documents/institution/:institutionId', async (req, res) => {
 router.get('/documents/:documentId', async (req, res) => {
   try {
     const { documentId } = req.params;
-    const userId = req.session.userId;
+    const userId = req.session.id_user;
 
     // Obține instituția utilizatorului curent
     const [userInstitution] = await pool.query(

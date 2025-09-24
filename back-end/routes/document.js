@@ -8,7 +8,7 @@ router.post('/log-document-view', async (req, res) => {
   console.log('Session:', req.session);
 
   const { documentName } = req.body;
-  const userId = req.session.userId;
+  const userId = req.session.id_user;
 
   if (!documentName) {
     console.log('Document name missing');
@@ -150,7 +150,7 @@ router.post('/sign', async (req, res) => {
   console.log('Session:', req.session);
   console.log('Request body:', req.body);
 
-  const userId = req.session.userId;
+  const userId = req.session.id_user;
   if (!userId) {
     console.log('User not authenticated, userId:', userId);
     return res.status(401).json({ success: false, message: 'User not authenticated' });
@@ -273,7 +273,7 @@ router.get('/signatures/:documentId', async (req, res) => {
   console.log('Get document signatures request');
   console.log('Session:', req.session);
 
-  const userId = req.session.userId;
+  const userId = req.session.id_user;
   if (!userId) {
     return res.status(401).json({ success: false, message: 'User not authenticated' });
   }

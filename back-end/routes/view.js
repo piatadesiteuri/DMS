@@ -8,7 +8,7 @@ const { logUserAction } = require('../utils/logger');
 router.get('/:documentId', async (req, res) => {
     try {
         const documentId = req.params.documentId;
-        const userId = req.session.userId;
+        const userId = req.session.id_user;
 
         console.log("View request received:", { documentId, userId });
 

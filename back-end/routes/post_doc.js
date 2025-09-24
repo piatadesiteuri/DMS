@@ -7820,7 +7820,7 @@ route.post('/document_types', async (req, res) => {
   let connection;
   try {
     // Check authentication
-    if (!req.session.userId) {
+    if (!req.session || !req.session.id_user) {
       return res.status(401).json({ error: 'Not authenticated' });
     }
 
@@ -7829,7 +7829,7 @@ route.post('/document_types', async (req, res) => {
     // Get user's role and institution
     const [user] = await connection.query(
       'SELECT roles, institution_id FROM user WHERE id_user = ?',
-      [req.session.userId]
+      [req.session.id_user]
     );
 
     if (!user || !user[0]) {
@@ -10579,7 +10579,7 @@ route.get('/document-complete/:documentName', async (req, res) => {
   try {
     const { documentName } = req.params;
     
-    if (!req.session.user) {
+    if (!req.session || !req.session.id_user) {
       return res.status(401).json({ success: false, error: 'Unauthorized' });
     }
 
@@ -10634,7 +10634,7 @@ route.get('/document-complete/:documentName', async (req, res) => {
       await connection.query(
         `INSERT INTO table_log (user_id, document_id, action, timestamp) 
          VALUES (?, ?, 'view', NOW())`,
-        [req.session.user.id_user, document.id_document]
+        [req.session.id_user, document.id_document]
       );
 
       // Prepare complete response
