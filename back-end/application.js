@@ -435,7 +435,7 @@ app.post('/post_docs/csc/sign', async (req, res) => {
         host: process.env.DB_HOST || process.env.MYSQL_HOST || '127.0.0.1',
         user: process.env.DB_USER || process.env.MYSQL_USER || 'root',
         password: process.env.DB_PASSWORD || process.env.MYSQL_PASSWORD || '',
-        database: process.env.DB_NAME || process.env.DB_DATABASE || process.env.MYSQL_DATABASE || 'PSPD'
+        database: process.env.MYSQL_DATABASE || process.env.DB_NAME || process.env.DB_DATABASE || 'railway'
       });
       await pool.query(`CREATE TABLE IF NOT EXISTS table_document_signatures (
         id INT AUTO_INCREMENT PRIMARY KEY,

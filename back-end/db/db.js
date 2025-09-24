@@ -38,7 +38,7 @@ const dbConfig = {
     host: process.env.MYSQL_HOST || process.env.DB_HOST || '127.0.0.1',
     user: process.env.MYSQL_USER || process.env.DB_USER || 'root',
     password: process.env.MYSQL_PASSWORD || process.env.DB_PASSWORD || '',
-    database: process.env.MYSQL_DATABASE || process.env.DB_DATABASE || 'PSPD',
+    database: process.env.MYSQL_DATABASE || process.env.DB_DATABASE || 'railway',
     port: process.env.MYSQL_PORT || 3306,
     waitForConnections: true,
     connectionLimit: 10,
