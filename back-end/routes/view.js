@@ -78,6 +78,12 @@ router.get('/:documentId', async (req, res) => {
 
         if (!filePath) {
             console.error("File not found at any of the paths");
+            if (process.env.NODE_ENV === 'production') {
+                return res.status(404).json({ 
+                    error: "File not available", 
+                    message: "Document exists in database but physical file is not accessible in production environment." 
+                });
+            }
             return res.status(404).json({ error: "File not found" });
         }
 

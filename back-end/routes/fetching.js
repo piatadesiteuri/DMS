@@ -261,6 +261,12 @@ route.get('/download_doc/:path/:nom_doc', async function (req, res) {
         
         if (!fs.existsSync(fullPath)) {
             console.log('File not found at path:', fullPath);
+            if (process.env.NODE_ENV === 'production') {
+                return res.status(404).json({ 
+                    error: 'File not available', 
+                    message: 'Document exists in database but physical file is not accessible in production environment.' 
+                });
+            }
             return res.status(404).json({ error: 'File not found' });
         }
 

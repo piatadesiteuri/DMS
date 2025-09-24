@@ -2165,22 +2165,24 @@ route.post('/folders', async function (req, res) {
         return res.status(400).json({ error: "Folder already exists with this path" });
       }
 
-      // Create the folder in the uploads directory
-      const uploadsDir = path.join(__dirname, '..', 'uploads');
-      const fullPath = path.join(uploadsDir, finalFolderPath);
+      // Skip physical folder creation in production (Railway)
+      // Application works with database-only folder management
+      if (process.env.NODE_ENV !== 'production') {
+        // Create the folder in the uploads directory (local development only)
+        const uploadsDir = path.join(__dirname, '..', 'uploads');
+        const fullPath = path.join(uploadsDir, finalFolderPath);
 
-      try {
-        if (!fs.existsSync(fullPath)) {
-          fs.mkdirSync(fullPath, { recursive: true });
-          console.log(`Created personal directory: ${fullPath}`);
+        try {
+          if (!fs.existsSync(fullPath)) {
+            fs.mkdirSync(fullPath, { recursive: true });
+            console.log(`Created personal directory: ${fullPath}`);
+          }
+        } catch (folderError) {
+          console.error("Error creating personal folder:", folderError);
+          // In development, this is a real error, but in production we skip it
         }
-      } catch (folderError) {
-        console.error("Error creating personal folder:", folderError);
-        con.release();
-        return res.status(500).json({ 
-          error: "Failed to create folder", 
-          details: folderError.message 
-        });
+      } else {
+        console.log(`✅ Production mode: Folder managed in database only: ${finalFolderPath}`);
       }
 
       // Insert the new personal folder (always private for personal users)
@@ -7463,6 +7465,12 @@ route.get('/documents/:documentId/download', async function (req, res) {
     const filePath = path.join(uploadsDir, document.path);
 
     if (!fs.existsSync(filePath)) {
+      if (process.env.NODE_ENV === 'production') {
+        return res.status(404).json({ 
+          error: "File not available", 
+          message: "Document exists in database but physical file is not accessible in production environment." 
+        });
+      }
       return res.status(404).json({ error: "File not found on server" });
     }
 

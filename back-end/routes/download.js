@@ -72,11 +72,20 @@ route.get('/:filename', async function (req, res) {
     let filePath = path.join(__dirname, '..', document.path, document.nom_document);
     console.log("Attempting to download file from:", filePath);
 
-    // Check if file exists
+    // Check if file exists - in production (Railway) files might not be available
     if (!fs.existsSync(filePath)) {
       console.log("File not found at path:", filePath);
       
-      // Try to find the file in the uploads directory
+      // In production (Railway), physical files might not be available
+      if (process.env.NODE_ENV === 'production') {
+        console.log("Production mode: File not available for download");
+        return res.status(404).json({ 
+          error: "File not available", 
+          message: "Document exists in database but physical file is not accessible in production environment. Please contact administrator to restore files." 
+        });
+      }
+      
+      // Try to find the file in the uploads directory (development only)
       const uploadsDir = path.join(__dirname, '..', 'uploads');
       console.log("Searching for file in uploads directory:", uploadsDir);
       
